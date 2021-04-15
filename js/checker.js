@@ -9,27 +9,34 @@ export default class Checker {
     verifyInput() {
         if(this.form.value === '') {
 
-            let newDiv = this.createElement()
-            
+            let errorDiv = this.showError()
+            errorDiv.style.display = "block"
+
             setTimeout(() => {
-                document.body.removeChild(newDiv)
-            }, 3000)
+                errorDiv.style.display = "none"
+        
+                while (errorDiv.firstChild) {
+                    errorDiv.firstChild.remove()
+                }
+            }, 1500)
             
         } else {
             const request = new Request(this.form.value)
             request.getInfo()
+
+            this.form.value = ''
         }
     }
 
-    createElement() {
-        let test = document.createElement('div')
-
-        test.classList.add("alert", "alert-danger")
-        test.textContent = "A simple danger alert—check it out!"
+    showError() {
+        const errorContainer = document.querySelector(".error-container")
+        const errorTemplate = document.querySelector(".error-template").content
         
-        this.fragment.appendChild(test)  
-        document.body.appendChild(this.fragment)
+        const clone = errorTemplate.cloneNode(true);
+        this.fragment.appendChild(clone)
 
-        return test
+        errorContainer.appendChild(this.fragment)
+
+        return errorContainer
     }
 }
