@@ -6,7 +6,12 @@ export default class Carousel {
             "1": "Joker", "2": "Hulk", "3": "Batman", "4": "Justice league", 
             "5": "Avengers", "6": "The Godfather", "7": "Run", "8": "Titanic",
             "9": "It", "10": "Superman", "11": "King Kong", "12": "Boss Level",
-            "13": "Infinity War", "14": "The Suicide Squad", "15": "Godzilla", "16": "Blackhat",
+            "13": "Infinity War", "14": "The Suicide Squad", "15": "Godzilla", 
+            "16": "Blackhat", "17": "Mortal Kombat", "18": "2067", "19": "Sonic",
+            "20": "Venom", "21": "Tom and Jerry", "22": "Titanic", "23": "Frozen",
+            "24": "Minions", "25": "Skyfall", "26": "Toy Story 2", "27": "The Lord of the Rings",
+            "28": "The Lion King", "29": "Furious 7", "30": "Aladdin", 
+            "31": "Zootopia", "32": "The exorcist", "33": "Despicable Me 3"
         }
         this.images = []
     }

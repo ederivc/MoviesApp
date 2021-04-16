@@ -14,40 +14,54 @@ export default class Request {
             const response = await fetch(url)
             const json = await response.json()
     
-            // this.sendInfo(json)
             const display = new Display()
             display.displayUserCards(json.Search)
-            // console.log(json.Search)
-
+            console.log(json)
         } catch (error) {
             console.log(error)
         }
     }
 
-    sendInfo(json) {
-        console.log(json)
-        
-
-    }
-
     getMultipleInfo(imgArray) {
-        imgArray.forEach(async movie => {
-            try {
-                const url = `http://www.omdbapi.com/?t=${movie}&apikey=34cd88eb`   
-                const response = await fetch(url)
-                const json = await response.json()
+        // imgArray.forEach(async movie => {
+        //     try {
+        //         const url = `http://www.omdbapi.com/?t=${movie}&apikey=34cd88eb`   
+        //         const response = await fetch(url)
+        //         const json = await response.json()
 
-                this.multipleImg[0].push(json.Poster)
-                this.multipleImg[1].push(json.Title)
+        //         this.multipleImg[0].push(json.Poster)
+        //         this.multipleImg[1].push(json.Title)
 
-            } catch (error) {
-                console.log(error)
-            }
+        //     } catch (error) {
+        //         console.log(error)
+        //     }
+        // })
+        // const display = new Display(this.multipleImg)
+        // display.displayCards()
 
-            const display = new Display(this.multipleImg)
-            display.displayCards()
-            // console.log(this.multipleImg)
+        // FROM HERE
+        let result = imgArray.map(item => {
+            return new Promise(async(resolve) => {
+                try {
+                    const url = `http://www.omdbapi.com/?t=${item}&apikey=34cd88eb`   
+                    const response = await fetch(url)
+                    const json = await response.json()
+    
+                    this.multipleImg[0].push(json.Poster)
+                    this.multipleImg[1].push(json.Title)
+                   
+                    resolve()
+                } catch (error) {
+                    console.log(error)
+                }
+            })
         })
 
+        Promise.all(result).then(() => {
+            const display = new Display(this.multipleImg)
+            // console.log(this.multipleImg[1])
+            display.displayCards()
+        })
+        // TO HERE
     }
 }

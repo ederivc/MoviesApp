@@ -3,14 +3,38 @@ export default class Display {
         this.imgArray = imgArray
         this.cards = document.querySelectorAll('.img-test')
         this.cardTitle = document.querySelectorAll('.card-title')
+        this.templateDefCard = document.querySelector('.default-cards').content
     }
 
     displayCards() {
-        this.cards.forEach((card, i) => {
-            card.setAttribute('src', `${this.imgArray[0][i]}`)
-        })
+        const container = document.querySelectorAll('.default-row')
+        const fragment = new DocumentFragment()
 
-        this.cardTitle.forEach((title, i) => title.innerText = this.imgArray[1][i])
+        let movies = this.imgArray[0]
+        let title = this.imgArray[1]
+        let clone = this.templateDefCard.cloneNode(true)
+        const newArray = this.getNewArray(movies)
+        const newArrayname = this.getNewArray(title)
+        container.forEach(row => {
+
+            if(row.id === "row-1") {
+                movies = newArray[1]
+                title = newArrayname[1]
+            } else {
+                movies = newArray[0]
+                title = newArrayname[0]
+            }
+            movies.forEach((movie, i) => {
+                const card = this.templateDefCard.querySelector('.card')
+    
+                card.children[0].setAttribute('src', `${movie}`)
+                card.children[1].children[0].innerText = title[i]
+    
+                clone = this.templateDefCard.cloneNode(true)
+                fragment.appendChild(clone)
+            })
+            row.appendChild(fragment)
+        })
     }
 
     displayUserCards(movies) {
@@ -24,9 +48,8 @@ export default class Display {
 
     filteruserCards(fragment, template, movies, test) {
         let clone = template.cloneNode(true)
-
         const sliceMovies = movies.slice(0, 6)
-        // console.log(sliceMovies)
+        
         sliceMovies.forEach((movie, i) => {
             const card = template.querySelector('.card')
             card.id = `${i}`
@@ -44,7 +67,6 @@ export default class Display {
         const newCardImg = card.children[0]
         const newCardBody = card.children[1]
         newCardImg.setAttribute('src', `${movie.Poster}`)
-        // console.log(newCardBody.children)
         newCardBody.children[0].innerText = movie.Title
     }
 
@@ -52,5 +74,11 @@ export default class Display {
         while (moviContainer.firstChild) {
             moviContainer.firstChild.remove()
         }
+    }
+
+    getNewArray(movies) {
+        const left = movies
+        const right = left.splice(0, Math.ceil(left.length / 2))
+        return [left, right]
     }
 }
