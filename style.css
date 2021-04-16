@@ -3,6 +3,34 @@ body {
   padding: 0;
 }
 
+/* .card, .col {
+  margin: 0;
+  padding: 0;
+} */
+
+.col, .card {
+  max-height: 32rem;
+  min-height: 32rem;
+  overflow-y: hidden;
+}
+
+.card-body {
+  max-height: 14rem;
+  min-height: 14rem;
+}
+
+.card img {
+  max-height: 18rem;
+  min-height: 18rem;
+}
+
+.row {
+  margin-bottom: 20px;
+}
+
+.popular-heading {
+  color: #fff;
+}
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */
 

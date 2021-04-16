@@ -3,8 +3,8 @@ import Carousel from './carousel.js'
 
 window.addEventListener('DOMContentLoaded', () => {
     const submitBtn = document.querySelector('.btn-search')
-    const carousel = new Carousel()
-    carousel.start()
+    // const carousel = new Carousel()
+    // carousel.start()
     
     submitBtn.addEventListener('click', e => {
         e.preventDefault()

@@ -20,5 +20,14 @@ export default class Request {
 
     sendInfo(json) {
         console.log(json)
+        const card = document.querySelectorAll('.img-test')
+        const cardTitle = document.querySelectorAll('.card-title')
+        const cardText = document.querySelectorAll('.card-text')
+
+        card.forEach(element => element.setAttribute('src', `${json.Poster}`))
+
+        cardTitle.forEach(element => element.innerText = json.Title)
+
+        cardText.forEach(element => element.innerText = json.Plot)
     }
 }

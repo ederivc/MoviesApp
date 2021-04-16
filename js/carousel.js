@@ -17,7 +17,7 @@ export default class Carousel {
     }
 
     async displayCoursel(movie) {
-        const image = document.querySelector('.img-1')
+        const image = document.querySelector('.img-test')
         const url = `http://www.omdbapi.com/?t=${movie.name}&apikey=34cd88eb`   
         
         const response = await fetch(url)
