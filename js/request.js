@@ -10,11 +10,14 @@ export default class Request {
         try {        
             // S general search
             // T individual
-            const url = `http://www.omdbapi.com/?t=${this.inputValue}&apikey=34cd88eb`   
+            const url = `http://www.omdbapi.com/?s=${this.inputValue}&apikey=34cd88eb`   
             const response = await fetch(url)
             const json = await response.json()
     
-            this.sendInfo(json)
+            // this.sendInfo(json)
+            const display = new Display()
+            display.displayUserCards(json.Search)
+            // console.log(json.Search)
 
         } catch (error) {
             console.log(error)
@@ -23,15 +26,8 @@ export default class Request {
 
     sendInfo(json) {
         console.log(json)
-        // const card = document.querySelectorAll('.img-test')
-        // const cardTitle = document.querySelectorAll('.card-title')
-        // const cardText = document.querySelectorAll('.card-text')
+        
 
-        // card.forEach(element => element.setAttribute('src', `${json.Poster}`))
-
-        // cardTitle.forEach(element => element.innerText = json.Title)
-
-        // cardText.forEach(element => element.innerText = json.Plot)
     }
 
     getMultipleInfo(imgArray) {
