@@ -8,7 +8,7 @@ export default class Request {
 
   async getInfo(inputValue) {
     try {
-      const url = `http://www.omdbapi.com/?s=${inputValue}&apikey=YOURAPI`;
+      const url = `http://www.omdbapi.com/?s=${inputValue}&apikey=YOURAPIKEY`;
       const response = await fetch(url);
       const json = await response.json();
 
@@ -27,7 +27,7 @@ export default class Request {
     const result = moviesName.map((item) => {
       return new Promise(async (resolve) => {
         try {
-          const url = `http://www.omdbapi.com/?t=${item}&apikey=34cd88eb`;
+          const url = `http://www.omdbapi.com/?t=${item}&apikey=YOURAPIKEY`;
           const response = await fetch(url);
           const json = await response.json();
 
