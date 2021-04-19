@@ -1,67 +1,48 @@
-import Display from './display.js'
+import Display from "./display.js";
+import Checker from "./checker.js";
 
 export default class Request {
-    constructor (inputValue) {
-        this.inputValue = inputValue
-        this.multipleImg = [[], []]
-    }
+  async getInfo(inputValue) {
+    try {
+      const url = `http://www.omdbapi.com/?s=${inputValue}&apikey=YOURAPI`;
+      const response = await fetch(url);
+      const json = await response.json();
 
-    async getInfo() {
-        try {        
-            // S general search
-            // T individual
-            const url = `http://www.omdbapi.com/?s=${this.inputValue}&apikey=34cd88eb`   
-            const response = await fetch(url)
-            const json = await response.json()
-    
-            const display = new Display()
-            display.displayUserCards(json.Search)
-            console.log(json)
+      const template = document.querySelector(".int-card").content;
+      const container = document.querySelector(".new-row");
+
+      const display = new Display(json.Search, template, container);
+      display.displayUserCards();
+    } catch (error) {
+      const checker = new Checker();
+      checker.getErrorContainer("Movie not found!");
+    }
+  }
+
+  getMultipleInfo(moviesName) {
+    const moviesInfo = [[], []];
+    const result = moviesName.map((item) => {
+      return new Promise(async (resolve) => {
+        try {
+          const url = `http://www.omdbapi.com/?t=${item}&apikey=34cd88eb`;
+          const response = await fetch(url);
+          const json = await response.json();
+
+          moviesInfo[0].push(json.Poster);
+          moviesInfo[1].push(json.Title);
+
+          resolve();
         } catch (error) {
-            console.log(error)
+          console.log(error);
         }
-    }
+      });
+    });
 
-    getMultipleInfo(imgArray) {
-        // imgArray.forEach(async movie => {
-        //     try {
-        //         const url = `http://www.omdbapi.com/?t=${movie}&apikey=34cd88eb`   
-        //         const response = await fetch(url)
-        //         const json = await response.json()
-
-        //         this.multipleImg[0].push(json.Poster)
-        //         this.multipleImg[1].push(json.Title)
-
-        //     } catch (error) {
-        //         console.log(error)
-        //     }
-        // })
-        // const display = new Display(this.multipleImg)
-        // display.displayCards()
-
-        // FROM HERE
-        let result = imgArray.map(item => {
-            return new Promise(async(resolve) => {
-                try {
-                    const url = `http://www.omdbapi.com/?t=${item}&apikey=34cd88eb`   
-                    const response = await fetch(url)
-                    const json = await response.json()
-    
-                    this.multipleImg[0].push(json.Poster)
-                    this.multipleImg[1].push(json.Title)
-                   
-                    resolve()
-                } catch (error) {
-                    console.log(error)
-                }
-            })
-        })
-
-        Promise.all(result).then(() => {
-            const display = new Display(this.multipleImg)
-            // console.log(this.multipleImg[1])
-            display.displayCards()
-        })
-        // TO HERE
-    }
+    Promise.all(result).then(() => {
+      const container = document.querySelectorAll(".default-row");
+      const template = document.querySelector(".default-cards").content;
+      const display = new Display(moviesInfo, template, container);
+      display.displayDefaultCards();
+    });
+  }
 }

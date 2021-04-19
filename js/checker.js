@@ -1,42 +1,42 @@
-import Request from './request.js'
+import Request from "./request.js";
 
 export default class Checker {
-    constructor () {
-        this.form = document.querySelector('.my-input')
-        this.fragment = new DocumentFragment()
-    } 
+  verifyInput() {
+    const inputValue = document.querySelector(".my-input");
 
-    verifyInput() {
-        if(this.form.value === '') {
+    if (inputValue.value === "") {
+      this.getErrorContainer("You must fill in all of the fields");
+    } else {
+      const request = new Request();
+      request.getInfo(inputValue.value);
 
-            let errorDiv = this.showError()
-            errorDiv.style.display = "block"
-
-            setTimeout(() => {
-                errorDiv.style.display = "none"
-        
-                while (errorDiv.firstChild) {
-                    errorDiv.firstChild.remove()
-                }
-            }, 1500)
-            
-        } else {
-            const request = new Request(this.form.value)
-            request.getInfo()
-
-            this.form.value = ''
-        }
+      inputValue.value = "";
     }
+  }
 
-    showError() {
-        const errorContainer = document.querySelector(".error-container")
-        const errorTemplate = document.querySelector(".error-template").content
-        
-        const clone = errorTemplate.cloneNode(true);
-        this.fragment.appendChild(clone)
+  getErrorContainer(errorMsg) {
+    const fragment = new DocumentFragment();
+    const errorContainer = document.querySelector(".error-container");
+    const errorTemplate = document.querySelector(".error-template").content;
 
-        errorContainer.appendChild(this.fragment)
+    const clone = errorTemplate.cloneNode(true);
+    fragment.appendChild(clone);
 
-        return errorContainer
-    }
+    errorContainer.appendChild(fragment);
+
+    document.querySelector(".alert-error").innerText = errorMsg;
+    this.displayError(errorContainer);
+  }
+
+  displayError(errorContainer) {
+    errorContainer.style.display = "block";
+
+    setTimeout(() => {
+      errorContainer.style.display = "none";
+
+      while (errorContainer.firstChild) {
+        errorContainer.firstChild.remove();
+      }
+    }, 1500);
+  }
 }
