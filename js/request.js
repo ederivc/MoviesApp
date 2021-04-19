@@ -2,16 +2,19 @@ import Display from "./display.js";
 import Checker from "./checker.js";
 
 export default class Request {
+  constructor() {
+    this.template = document.querySelector(".card-template").content;
+  }
+
   async getInfo(inputValue) {
     try {
-      const url = `http://www.omdbapi.com/?s=${inputValue}&apikey=YOURAPI`;
+      const url = `http://www.omdbapi.com/?s=${inputValue}&apikey=34cd88eb`;
       const response = await fetch(url);
       const json = await response.json();
 
-      const template = document.querySelector(".int-card").content;
       const container = document.querySelector(".new-row");
 
-      const display = new Display(json.Search, template, container);
+      const display = new Display(json.Search, this.template, container);
       display.displayUserCards();
     } catch (error) {
       const checker = new Checker();
@@ -40,8 +43,7 @@ export default class Request {
 
     Promise.all(result).then(() => {
       const container = document.querySelectorAll(".default-row");
-      const template = document.querySelector(".default-cards").content;
-      const display = new Display(moviesInfo, template, container);
+      const display = new Display(moviesInfo, this.template, container);
       display.displayDefaultCards();
     });
   }
