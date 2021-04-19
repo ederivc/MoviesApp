@@ -3,16 +3,6 @@ body {
   padding: 0;
 }
 
-.col,
-.card {
-  overflow-y: hidden;
-}
-
-.card-body {
-  max-height: 14rem;
-  min-height: 14rem;
-}
-
 .card img {
   max-height: 18rem;
   min-height: 18rem;
@@ -26,20 +16,15 @@ body {
   display: none;
 }
 
-/* CUSTOMIZE THE CAROUSEL
--------------------------------------------------- */
-
-/* Carousel base class */
 .carousel {
   margin-bottom: 4rem;
 }
-/* Since positioning the image, we need to help out the caption */
+
 .carousel-caption {
   bottom: 3rem;
   z-index: 10;
 }
 
-/* Declare heights because of positioning of img element */
 .carousel-item {
   height: 32rem;
 }
@@ -51,11 +36,7 @@ body {
   height: 32rem;
 }
 
-/* RESPONSIVE CSS
-  -------------------------------------------------- */
-
 @media (min-width: 40em) {
-  /* Bump up size of carousel content */
   .carousel-caption p {
     margin-bottom: 1.25rem;
     font-size: 1.25rem;
