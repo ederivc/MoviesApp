@@ -10,16 +10,12 @@
     integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
   <link rel="stylesheet" href="./style.css">
 
-  <title>Document</title>
+  <title>Movies App</title>
 </head>
 
 <body class="bg-dark">
+
   <div class="error-container"></div>
-  <template class="error-template">
-    <div class="alert alert-danger alert-error mb-0 alert-dismissible fade show" role="alert">
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-  </template>
 
   <div class="error"></div>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -72,31 +68,13 @@
     </div>
     <div class="carousel-inner">
       <div class="carousel-item active" style="background-image: url('img/img1.jpg');">
-        <div class="container">
-          <div class="carousel-caption text-start">
-            <h1>Example headline.</h1>
-            <p>Some representative placeholder content for the first slide of the carousel.</p>
-            <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p>
-          </div>
-        </div>
+        <div class="container carousel-info"></div>
       </div>
       <div class="carousel-item" style="background-image: url('./img/img2.jpg');">
-        <div class="container">
-          <div class="carousel-caption">
-            <h1>Another example headline.</h1>
-            <p>Some representative placeholder content for the second slide of the carousel.</p>
-            <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>
-          </div>
-        </div>
+        <div class="container carousel-info"></div>
       </div>
       <div class="carousel-item" style="background-image: url('./img/img3.jpg');">
-        <div class="container">
-          <div class="carousel-caption text-end">
-            <h1>One more for good measure.</h1>
-            <p>Some representative placeholder content for the third slide of this carousel.</p>
-            <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>
-          </div>
-        </div>
+        <div class="container carousel-info"></div>
       </div>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
@@ -110,13 +88,27 @@
   </div>
 
   <div class="cards-container">
-    <h2 class="text-center popular-heading mb-4">POPULAR MOVIES</h2>
+    <h2 class="text-center text-light mb-4">POPULAR MOVIES</h2>
     <div class="container-fluid">
       <div class="row new-row mt-1 mb-1"></div>
       <div class="row default-row mt-1 mb-1" id="row-1"></div>
       <div class="row default-row mt-1 mb-1" id="row-2"></div>
     </div>
   </div>
+
+  <template class="carousel-template">
+    <div class="carousel-caption text-start">
+      <h1>Example headline.</h1>
+      <p>Some representative placeholder content for the first slide of the carousel.</p>
+      <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p>
+    </div>
+  </template>
+
+  <template class="error-template">
+    <div class="alert alert-danger alert-error mb-0 alert-dismissible fade show" role="alert">
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  </template>
 
   <template class="card-template">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xxl mb-lg-2 mb-sm-2">
